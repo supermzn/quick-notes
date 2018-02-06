@@ -10,6 +10,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+
 /**
  * Created by mazena on 28.01.18.
  */
@@ -23,5 +24,14 @@ class NoteActivityTest {
     @Test
     fun testTest() {
         onView(withId(R.id.rv_notes)).perform(click())
+    }
+
+    @Test
+    fun noteDisplayTest() {
+        val presenter = NotesPresenter()
+        presenter.attachView(notesActivityTestRule.activity)
+
+        presenter.loadNotes()
+
     }
 }

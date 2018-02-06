@@ -17,8 +17,7 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class NotesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, NotesContract.View {
 
-    private val mNotesList = arrayListOf(Note(1, "Title First", "Description....."))
-    private val mNoteAdapter: NoteAdapter by lazy { NoteAdapter(mNotesList) }
+    private val mNoteAdapter: NoteAdapter by lazy { NoteAdapter() }
     private val mPresenter = NotesPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +39,7 @@ class NotesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         nav_view.setNavigationItemSelectedListener(this)
         initNotesRecycler()
+        mPresenter.loadNotes()
     }
 
     fun initNotesRecycler() {
@@ -48,8 +48,9 @@ class NotesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun showNotes(notesList: List<Note>) {
-
+        mNoteAdapter.updateNotes(notesList)
     }
+
 
     override fun onDestroy() {
         mPresenter.detachView()

@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.note_item_content.view.*
 /**
  * Created by mazena on 27.01.18.
  */
-class NoteAdapter(val notesList: List<Note>) : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
+class NoteAdapter : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
+    private val notesList: MutableList<Note> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(parent.inflate(R.layout.note_item))
@@ -22,6 +23,12 @@ class NoteAdapter(val notesList: List<Note>) : RecyclerView.Adapter<NoteAdapter.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
             holder.bind(notesList[position])
+
+    fun updateNotes(notesUpdated: List<Note>) {
+        notesList.clear()
+        notesList.addAll(notesUpdated)
+        notifyDataSetChanged()
+    }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.tv_note_title
@@ -32,6 +39,8 @@ class NoteAdapter(val notesList: List<Note>) : RecyclerView.Adapter<NoteAdapter.
             description.text = note.description
         }
     }
+
+
 
 
 }

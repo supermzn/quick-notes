@@ -23,7 +23,7 @@ class NotesPresenter : NotesContract.Preseneter {
         mView?.showNotes(mNotesList)
     }
 
-    private fun initNotesList() = arrayListOf<Note>()
+    fun initNotesList() = arrayListOf<Note>()
 
 
 }
