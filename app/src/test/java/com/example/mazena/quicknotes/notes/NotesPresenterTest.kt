@@ -1,9 +1,13 @@
 package com.example.mazena.quicknotes.notes
 
-import io.mockk.mockk
-import org.junit.Assert.*
+import com.example.mazena.quicknotes.data.NoteDbDao
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
+
 
 /**
  * Created by mazena on 30.01.18.
@@ -11,9 +15,12 @@ import org.junit.Test
 class NotesPresenterTest {
     lateinit var mPresenter: NotesPresenter
 
+    val view = mock(NotesContract.View::class.java)
+    val dbReader = mock(NoteDbDao::class.java)
+
     @Before
     fun beforeTest() {
-        mPresenter = NotesPresenter()
+        mPresenter = NotesPresenter(view, dbReader)
     }
 
     @Test
@@ -24,18 +31,8 @@ class NotesPresenterTest {
     }
 
     @Test
-    fun attachTest() {
-        assertNull(mPresenter.mView)
-
-        mPresenter.attachView(mockk())
-        assertNotNull(mPresenter.mView)
-    }
-
-    @Test
-    fun detachTest() {
-        mPresenter.attachView(mockk())
-        assertNotNull(mPresenter.mView)
-        mPresenter.detachView()
-        assertNull(mPresenter.mView)
+    fun addNoteTest() {
+        mPresenter.addNote()
+        verify(view).showAddNote()
     }
 }

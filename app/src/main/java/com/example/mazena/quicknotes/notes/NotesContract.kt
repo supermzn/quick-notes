@@ -1,5 +1,6 @@
 package com.example.mazena.quicknotes.notes
 
+import android.content.Context
 import com.example.mazena.quicknotes.data.Note
 
 /**
@@ -8,14 +9,13 @@ import com.example.mazena.quicknotes.data.Note
 interface NotesContract {
     interface View {
         fun showNotes(notesList: List<Note>)
+
+        fun showAddNote()
     }
 
-    interface Preseneter {
+    interface Presenter {
         fun loadNotes()
 
-        fun attachView(notesActivity: NotesActivity)
-
-        fun detachView()
-
+        fun addNote()
     }
 }
