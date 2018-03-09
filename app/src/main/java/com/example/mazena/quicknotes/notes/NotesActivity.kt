@@ -13,13 +13,19 @@ import com.example.mazena.quicknotes.R
 import com.example.mazena.quicknotes.addNote.AddNoteActivity
 import com.example.mazena.quicknotes.data.Note
 import com.example.mazena.quicknotes.data.NoteDatabase
+import com.example.mazena.quicknotes.notedetails.NoteDetailsActivity
+import com.example.mazena.quicknotes.notedetails.NoteDetailsPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class NotesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, NotesContract.View {
 
-    private val mNoteAdapter: NoteAdapter by lazy { NoteAdapter() }
+    private val mNoteAdapter: NoteAdapter by lazy {
+        NoteAdapter {
+            mPresenter.itemClicked(it)
+        }
+    }
     private lateinit var mPresenter: NotesContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +60,12 @@ class NotesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     override fun showAddNote() {
         val intent = Intent(this, AddNoteActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun openNoteDetails(noteId: Int) {
+        val intent = Intent(this, NoteDetailsActivity::class.java)
+        intent.putExtra("note_id_extra", noteId)
         startActivity(intent)
     }
 

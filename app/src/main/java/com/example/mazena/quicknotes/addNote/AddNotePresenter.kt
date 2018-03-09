@@ -17,8 +17,10 @@ class AddNotePresenter(
     override fun addNote(title: String, content: String) {
         doAsync {
             dbReader.insertNote(Note(title = title, description = content))
+//            The noteView is first added, then displayed, otherwise will not be present in result list
+//            Can be moved outside async with live updates or something.
+            view.closeView()
         }
-        view.closeView()
     }
 
 }

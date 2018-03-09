@@ -21,4 +21,8 @@ class NotesPresenter(val mView: NotesContract.View, val mDbReader: NoteDbDao) : 
     override fun addNote() {
         mView.showAddNote()
     }
+
+    override fun itemClicked(position: Int) {
+        mView.openNoteDetails(mNotesList[position].id)
+    }
 }

@@ -11,11 +11,15 @@ interface NotesContract {
         fun showNotes(notesList: List<Note>)
 
         fun showAddNote()
+
+        fun openNoteDetails(noteId: Int)
     }
 
     interface Presenter {
         fun loadNotes()
 
         fun addNote()
+
+        fun itemClicked(position: Int)
     }
 }
