@@ -1,6 +1,5 @@
 package com.example.mazena.quicknotes.notedetails
 
-import android.content.Context
 import com.example.mazena.quicknotes.data.Note
 
 /**
@@ -11,11 +10,17 @@ interface NotesDetailsContract {
         fun showNote(note: Note)
 
         fun showError(errorMessage: String)
+
+        fun closeDetails()
     }
 
     interface Presenter {
 
         fun loadNote(id: Int)
+
+        fun onNoteDelete()
+
+        fun onEdit()
 
     }
 }

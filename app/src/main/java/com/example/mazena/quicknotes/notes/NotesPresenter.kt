@@ -3,6 +3,7 @@ package com.example.mazena.quicknotes.notes
 import com.example.mazena.quicknotes.data.Note
 import com.example.mazena.quicknotes.data.NoteDbDao
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 /**
  * Created by mazena on 28.01.18.
@@ -14,7 +15,9 @@ class NotesPresenter(val mView: NotesContract.View, val mDbReader: NoteDbDao) : 
         mNotesList.clear()
         doAsync {
             mNotesList.addAll(mDbReader.getAllNotes())
-            mView.showNotes(mNotesList)
+            uiThread {
+                mView.showNotes(mNotesList)
+            }
         }
     }
 
@@ -23,6 +26,7 @@ class NotesPresenter(val mView: NotesContract.View, val mDbReader: NoteDbDao) : 
     }
 
     override fun itemClicked(position: Int) {
-        mView.openNoteDetails(mNotesList[position].id)
+        if (position >= 0 && position < mNotesList.size)
+            mView.openNoteDetails(mNotesList[position].id)
     }
 }

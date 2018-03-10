@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/note_background"
     app:cardCornerRadius="@dimen/card_view_radius"
-    app:cardUseCompatPadding="true"
-    android:id="@+id/note_item">
+    app:cardUseCompatPadding="true">
 
     <include
         layout="@layout/note_item_content"

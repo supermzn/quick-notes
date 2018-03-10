@@ -2,6 +2,8 @@ package com.example.mazena.quicknotes.notedetails
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.example.mazena.quicknotes.R
 import com.example.mazena.quicknotes.data.Note
@@ -12,6 +14,7 @@ import kotlinx.android.synthetic.main.note_detail.*
  * Created by mazena on 17.02.18.
  */
 class NoteDetailsActivity : AppCompatActivity(), NotesDetailsContract.View {
+
     private lateinit var mPresenter: NotesDetailsContract.Presenter
     private val NOTE_ID_EXTRA = "note_id_extra"
 
@@ -41,4 +44,23 @@ class NoteDetailsActivity : AppCompatActivity(), NotesDetailsContract.View {
         super.onResume()
         mPresenter.loadNote(intent.getIntExtra(NOTE_ID_EXTRA, -1))
     }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.note_details, menu)
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_edit) {
+//            mPresenter.addNote(et_content.text.toString(), et_note.text.toString())
+        } else if (item?.itemId == R.id.action_delete) {
+            mPresenter.onNoteDelete()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun closeDetails() {
+        finish()
+    }
+
 }

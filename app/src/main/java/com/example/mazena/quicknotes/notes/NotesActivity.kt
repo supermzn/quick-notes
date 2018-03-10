@@ -14,19 +14,15 @@ import com.example.mazena.quicknotes.addNote.AddNoteActivity
 import com.example.mazena.quicknotes.data.Note
 import com.example.mazena.quicknotes.data.NoteDatabase
 import com.example.mazena.quicknotes.notedetails.NoteDetailsActivity
-import com.example.mazena.quicknotes.notedetails.NoteDetailsPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class NotesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, NotesContract.View {
-
-    private val mNoteAdapter: NoteAdapter by lazy {
-        NoteAdapter {
-            mPresenter.itemClicked(it)
-        }
-    }
     private lateinit var mPresenter: NotesContract.Presenter
+    private val mNoteAdapter: NoteAdapter by lazy {
+        NoteAdapter { mPresenter.itemClicked(it) }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
