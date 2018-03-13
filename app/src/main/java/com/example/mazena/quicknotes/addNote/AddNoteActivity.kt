@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_add_note.*
 /**
  * Created by mazena on 15.02.18.
  */
-class AddNoteActivity: AppCompatActivity(), AddNoteContract.View {
+class AddNoteActivity : AppCompatActivity(), AddNoteContract.View {
     private lateinit var mPresenter: AddNoteContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class AddNoteActivity: AppCompatActivity(), AddNoteContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.action_accept) {
-            mPresenter.addNote(et_content.text.toString(), et_note.text.toString())
+            mPresenter.addNote(et_title.text.toString(), et_description.text.toString())
         }
         return super.onOptionsItemSelected(item)
     }

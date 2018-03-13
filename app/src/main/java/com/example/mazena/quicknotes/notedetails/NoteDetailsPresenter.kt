@@ -23,6 +23,10 @@ class NoteDetailsPresenter(
         }
     }
 
+    override fun onEdit() {
+        view.openEditNote(mNote.id)
+    }
+
     override fun onNoteDelete() {
         doAsync {
             dbReader.deleteNote(mNote)
@@ -30,8 +34,5 @@ class NoteDetailsPresenter(
                 view.closeDetails()
             }
         }
-    }
-
-    override fun onEdit() {
     }
 }

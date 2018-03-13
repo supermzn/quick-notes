@@ -12,6 +12,8 @@ interface NotesDetailsContract {
         fun showError(errorMessage: String)
 
         fun closeDetails()
+
+        fun openEditNote(noteId: Int)
     }
 
     interface Presenter {

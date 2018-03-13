@@ -1,5 +1,6 @@
 package com.example.mazena.quicknotes.notedetails
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -8,6 +9,7 @@ import android.view.View
 import com.example.mazena.quicknotes.R
 import com.example.mazena.quicknotes.data.Note
 import com.example.mazena.quicknotes.data.NoteDatabase
+import com.example.mazena.quicknotes.editNote.EditNoteActivity
 import kotlinx.android.synthetic.main.note_detail.*
 
 /**
@@ -42,7 +44,9 @@ class NoteDetailsActivity : AppCompatActivity(), NotesDetailsContract.View {
 
     override fun onResume() {
         super.onResume()
-        mPresenter.loadNote(intent.getIntExtra(NOTE_ID_EXTRA, -1))
+        val noteId = intent.getIntExtra(NOTE_ID_EXTRA, -1)
+        if (noteId != -1)
+            mPresenter.loadNote(noteId)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -52,11 +56,17 @@ class NoteDetailsActivity : AppCompatActivity(), NotesDetailsContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.action_edit) {
-//            mPresenter.addNote(et_content.text.toString(), et_note.text.toString())
+            mPresenter.onEdit()
         } else if (item?.itemId == R.id.action_delete) {
             mPresenter.onNoteDelete()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun openEditNote(noteId: Int) {
+        val intent = Intent(this, EditNoteActivity::class.java)
+        intent.putExtra("note_id_extra", noteId)
+        startActivity(intent)
     }
 
     override fun closeDetails() {

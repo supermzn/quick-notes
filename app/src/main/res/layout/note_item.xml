@@ -8,6 +8,7 @@
     app:cardUseCompatPadding="true">
 
     <include
+        android:id="@+id/contentInclude"
         layout="@layout/note_item_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
